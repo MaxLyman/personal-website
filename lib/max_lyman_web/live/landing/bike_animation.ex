@@ -36,13 +36,8 @@ defmodule MaxLymanWeb.Landing.BikeAnimation do
 
   end
 
-  def handle_event("scroll-event", id, padding, ride_direction, socket) do
-    {:noreply, socket}
-  end
-
   defp render_without_scroll(assigns, id, image, padding) do
     Logger.info("Rendering without scroll")
-
     ride_direction = case assigns.direction do
       "right-to-left" -> "scrolling-div-rtl"
       "left-to-right" -> "scrolling-div-ltr"
@@ -81,7 +76,7 @@ defmodule MaxLymanWeb.Landing.BikeAnimation do
             var bike = document.getElementById("bike-animation-1");
             var parent = bike.parentElement;
             var scroll = window.scrollY;
-            var direction = "#{direction}";
+            var direction = "#{direction}"; // DOESNT WORK EITEHR defaults to -scroll/2
             var translation = direction === "right-to-left" ? scroll/2 : -scroll/2;
             console.log("direction", direction); //THIS DOESNT WORK direction isnt being passed in and defaults to -scroll/2 which for now is fine
             bike.style.transform = "translateX(" + translation + "px)";

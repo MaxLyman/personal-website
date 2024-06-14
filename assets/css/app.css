@@ -46,9 +46,12 @@
     }
     100% {
         transform: translateX(100%);
+        visibility: hidden;
     }
 }
 
 .scrolling-div-ltr {
-    animation: scroll-ltr 10s linear infinite;
+    animation: scroll-ltr 10s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
