@@ -4,15 +4,16 @@ defmodule MaxLymanWeb.Landing.BikeAnimation do
   require Logger
 
   def mount(socket) do
+    Logger.info("socket #{inspect(Map.keys(socket))}")
+
     {:ok, socket}
   end
 
 
   def render(assigns) do
+    Logger.info("assigns #{inspect(assigns)}")
     direction = assigns.direction || "right-to-left"
     animation_number = assigns.animation_number || "1"
-
-    scroll = assigns.scroll
 
     id = "bike-animation-#{animation_number}"
     image = case direction do
@@ -27,62 +28,67 @@ defmodule MaxLymanWeb.Landing.BikeAnimation do
       _ -> {:error, "Invalid direction"}
     end
 
-    if scroll do
-      render_with_scroll(assigns, id, image, padding)
+    ride_direction = case direction do
+      "right-to-left" -> "scrolling-div-rtl"
+      "left-to-right" -> "scrolling-div-ltr"
+      _ -> {:error, "Invalid direction"}
+    end
+
+
+    assigns =
+      assigns
+      |> Map.put(:id, id)
+      |> Map.put(:image, image)
+      |> Map.put(:padding, padding)
+      |> Map.put(:tailwind_class, "#{padding} #{ride_direction}")
+
+
+
+    if assigns.scroll do
+      render_with_scroll(assigns)
     else
-      render_without_scroll(assigns, id, image, padding)
+      render_without_scroll(assigns)
     end
 
 
   end
 
-  defp render_without_scroll(assigns, id, image, padding) do
+  defp render_without_scroll(assigns) do
     Logger.info("Rendering without scroll")
-    ride_direction = case assigns.direction do
-      "right-to-left" -> "scrolling-div-rtl"
-      "left-to-right" -> "scrolling-div-ltr"
-      _ -> {:error, "Invalid direction"}
-    end
+
     # this is the dynamic part of the template
     ~H"""
-      <div id={"#{id}"} class={"#{padding} #{ride_direction}"}>
-        <div class="w-24 h-24">
-          <img
-            class={"w-24 h-24"}
-            src={"#{image}"}
-            alt="bike"/>
+      <div id={@id} class={@tailwind_class}>
+        <div name="bike">
+          <div class="w-24 h-24">
+            <img
+              name="bike_img"
+              src={@image}
+              class={"w-24 h-24"}
+              alt="bike"/>
+          </div>
         </div>
       </div>
     """
   end
 
 
-  defp render_with_scroll(assigns, id, image, padding) do
+  defp render_with_scroll(assigns) do
     Logger.info("Rendering with scroll")
-    Logger.info(id)
     ~H"""
-      <div class="overflow-hidden">
-        <div id={"#{id}"} class={"#{padding}"}>
-          <div class="w-24 h-24">
-            <img
-              class="w-24 h-24"
-              src={"#{image}"}
-              alt="bike"/>
+     <div>
+        <div class="overflow-hidden">
+          <div id="bike-div" phx-hook="BikeAnimation" data-direction="rtl" class={@padding}>
+            <div class="w-24 h-24" >
+              <img
+                id="bike-image"
+                src="/images/rtl-road-bike.png"
+                class="w-24 h-24"
+                alt="bike"/>
+            </div>
           </div>
         </div>
-        <script>
-
-          window.addEventListener("scroll", function() {
-            var bike = document.getElementById("bike-animation-1");
-            var parent = bike.parentElement;
-            var scroll = window.scrollY;
-            var direction = "#{direction}"; // DOESNT WORK EITEHR defaults to -scroll/2
-            var translation = direction === "right-to-left" ? scroll/2 : -scroll/2;
-            console.log("direction", direction); //THIS DOESNT WORK direction isnt being passed in and defaults to -scroll/2 which for now is fine
-            bike.style.transform = "translateX(" + translation + "px)";
-          });
-        </script>
-      </div>
+     </div>
     """
   end
 end
