@@ -13,14 +13,15 @@ config :max_lyman,
 
 # Configures the endpoint
 config :max_lyman, MaxLymanWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "http://localhost:4000"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: MaxLymanWeb.ErrorHTML, json: MaxLymanWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: MaxLyman.PubSub,
-  live_view: [signing_salt: "lOThyEue"]
+  live_view: [signing_salt: "lOThyEue"],
+  check_origin: ["http://localhost:4000"]
 
 # Configures the mailer
 #
