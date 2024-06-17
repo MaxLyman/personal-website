@@ -5,7 +5,8 @@ defmodule MaxLymanWeb.MasterLive do
     ~H"""
       <div>
         <.live_component module={MaxLymanWeb.Landing.LandingPage} id="landing-page"/>
-        <.live_component module={MaxLymanWeb.Headshot.HeadshotPage} id="headshot-page"/>
+        <.live_component module={MaxLymanWeb.Content.HeadshotPage} id="headshot-page"/>
+        <.live_component module={MaxLymanWeb.AwsView.HowItsDeployed} id="how-its-deployed"/>
       </div>
     """
   end

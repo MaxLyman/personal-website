@@ -17,8 +17,26 @@
     font-style: italic;
 }
 
+
+/* Text */
+.text-extra-large-style {
+    @apply bebas-neue-regular text-6xl text-white;
+
+}
+
+.text-large-style {
+    @apply bebas-neue-regular text-3xl text-white;
+}
+
 .landing-page-primary {
     @apply bg-pallet-navy;
+}
+
+
+@media (min-width: 1536px) {
+    .divider-style-x {
+    @apply divide-solid divide-x-4 divide-pallet-green;
+}
 }
 
 
