@@ -7,7 +7,7 @@ defmodule MaxLymanWeb.AwsView.HowItsDeployed do
 
   def render(assigns) do
     ~H"""
-    <div class="flex flex-col items-center text-extra-large-style h-lvh">
+    <div class="flex flex-col items-center text-extra-large-style h-lvh border border-gray-300">
     <!-- How it's deployed will be an interactive graph of how i deployed this project on aws-->
     <!-- I want it to look like those diagrams that show the structure of an aws project -->
     COMING SOON

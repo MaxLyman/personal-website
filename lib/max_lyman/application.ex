@@ -9,7 +9,7 @@ defmodule MaxLyman.Application do
   def start(_type, _args) do
     children = [
       MaxLymanWeb.Telemetry,
-      MaxLyman.Repo,
+      # MaxLyman.Repo,
       {DNSCluster, query: Application.get_env(:max_lyman, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: MaxLyman.PubSub},
       # Start the Finch HTTP client for sending emails

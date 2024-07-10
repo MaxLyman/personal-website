@@ -8,12 +8,12 @@
 import Config
 
 config :max_lyman,
-  ecto_repos: [MaxLyman.Repo],
+  # ecto_repos: [MaxLyman.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
 config :max_lyman, MaxLymanWeb.Endpoint,
-  url: [host: "http://localhost:4000"],
+  url: [host: "localhost"], # using http://localhost:4000
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: MaxLymanWeb.ErrorHTML, json: MaxLymanWeb.ErrorJSON],

@@ -1,15 +1,15 @@
 import Config
 
 # Configure your database
-config :max_lyman, MaxLyman.Repo,
-  username: "postgres",
-  password: "iS4,Ba{p%7g2C;csWeO$",
-  hostname: "localhost",
-  database: "max_lyman_dev",
-  port: 5433,
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+# config :max_lyman, MaxLyman.Repo,
+#   username: "postgres",
+#   password: "iS4,Ba{p%7g2C;csWeO$",
+#   hostname: "localhost",
+#   database: "max_lyman_dev",
+#   port: 5433,
+#   stacktrace: true,
+#   show_sensitive_data_on_connection_error: true,
+#   pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

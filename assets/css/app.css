@@ -33,6 +33,7 @@
 }
 
 
+
 @media (min-width: 1536px) {
     .divider-style-x {
     @apply divide-solid divide-x-4 divide-pallet-green;
